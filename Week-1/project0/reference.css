@@ -1,17 +1,16 @@
-.h1Class {
+.h1Class, .h1TClass {
     font-size: 40px;
-    background-color: rgb(250, 28, 28);
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: bold;
     text-align: center;
 }
 
+.h1Class {
+    background-color: rgb(250, 28, 28);
+}
+
 .h1TClass {
-    font-size: 40px;
     background-color: rgb(247, 159, 77);
-    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: bold;
-    text-align: center;
 }
 
 @media print {
