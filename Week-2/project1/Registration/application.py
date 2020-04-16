@@ -13,6 +13,6 @@ def index():
             var += "Enter details"
         else:
             var += " successfully registered"
-        return render_template("form.html", headline=var)
+        return render_template("registration_form.html", headline=var)
     else:
-        return render_template("form.html", headline="")
+        return render_template("registration_form.html", headline="")
