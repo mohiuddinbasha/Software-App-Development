@@ -1,0 +1,36 @@
+h1, h6 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    position: absolute;
+    top: 50px;
+    left: 150px;
+}
+
+#register {
+    text-align: center;
+}
+
+h6 {
+    position: absolute;
+    top: 120px;
+    left: 160px;
+    background-color: rgb(142, 235, 204);
+}
+
+.container {
+    width: auto;
+    position: absolute;
+    top: 150px;
+    left: 150px;
+}
+
+#centertable {
+    border-radius: 2px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+    position: relative;
+    top: 150px;
+}

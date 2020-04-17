@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='reference.css')}}"> -->
+        <style>
+          #register {
+              text-align: center;
+              position: relative;
+              top: 50px;
+          }
+          #centertable {
+              border-radius: 2px;
+              width: 50%;
+              margin: 0px auto;
+              float: none;
+              position: relative;
+              top: 120px;
+          }
+        </style>
+        <!-- <link rel = "stylesheet" href="reference.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <h1 id="register">Registered Users</h1>
+        <table class="table table-light table-bordered table-hover text-center" id="centertable">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">User</th>
+                <th scope="col">Password</th>
+                <th scope="col">Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for num in range(0,length) %}
+                <tr>
+                  <th scope="row">{{ num+1 }}</th>
+                  <td>{{ names[num] }}</td>
+                  <td>{{ pwds[num] }}</td>
+                  <td>{{ timest[num] }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
