@@ -20,9 +20,12 @@ with app.app_context():
 
 
 @app.route("/register", methods=["GET", "POST"])
-def index():
+@app.route("/register/<int:parameter>", methods=["GET", "POST"])
+def index(parameter=None):
     if request.method == "POST":
         var1 = request.form.get("email")
+        if "." not in var1:
+            return render_template("registration_form.html", headline="Please enter valid email address")
         var2 = request.form.get("pwd")
         check = User.query.filter_by(name=var1).first()
         if check is not None:
@@ -36,7 +39,13 @@ def index():
             var1 += " successfully registered. Please Login."
         return render_template("registration_form.html", headline=var1)
     else:
-        return render_template("registration_form.html", headline="")
+        variable = ""
+        if parameter == 1:
+            variable = "You have entered wrong credentials."
+        elif parameter == 2:
+            variable = "You are not registered. Please Register."
+        return render_template("registration_form.html", headline=variable)
+
 
 @app.route("/admin", methods=["GET"])
 def admin():
@@ -48,7 +57,6 @@ def admin():
         names.append(user.name)
         pwds.append(user.password)
         timest.append(time.ctime(user.timestamp))
-    # print(variable, file=sys.stdout)
     return render_template("registered_users.html", names=names, pwds=pwds, timest=timest, length=len(names))
 
 @app.route("/auth", methods=["POST"])
@@ -57,19 +65,23 @@ def authentication():
     pwd = request.form.get("pwd")
     check = User.query.filter_by(name=mail).first()
     if check is None:
-        return render_template("registration_form.html", headline="You are not registered. Please Register.")
+        return redirect(url_for('index', parameter=2))
     if mail == check.name and pwd == check.password:
-        if session.get("mail") is None:
-            session["mail"] = mail
-        return render_template("homepage.html", headline=mail)
+        if session.get(mail) is None:
+            session[mail] = pwd
+        return redirect(url_for('func', param=mail))
     else:
-        return render_template("registration_form.html", headline="You have entered wrong credentials.")
-        # return redirect(url_for('index'), headline="You have entered wrong credentials.")
+        return redirect(url_for('index', parameter=1))
 
-@app.route("/logout", methods=["POST"])
-def logout():
-    # if session.get(request.form.get("email")) is not None:
-    var = session.get("mail")
-    session.clear()
+@app.route("/home/<param>", methods=["GET", "POST"])
+def func(param):
+    if request.method == "GET":
+        if session.get(param) is not None:
+            return render_template("homepage.html", headline=param)
+        else:
+            return "<h1>Please Login to Access</h1>"
+
+@app.route("/logout/<param>", methods=["POST"])
+def logout(param):
+    session[param] = None
     return redirect(url_for('index'))
-    # return render_template("registration_form.html", headline="")

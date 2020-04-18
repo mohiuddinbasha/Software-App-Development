@@ -33,7 +33,7 @@
     <body>
         <h1 style="text-align: center; position: relative; top: 50px;">Welcome {{ headline }}</h1>
         <form method="post">
-            <button class="button" formaction="{{ url_for('logout') }}">Logout</button>
+            <button class="button" formaction="{{ url_for('logout', param=headline) }}">Logout</button>
         </form>
     </body>
 </html>
