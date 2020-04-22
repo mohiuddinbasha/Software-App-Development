@@ -28,6 +28,8 @@ def main():
             db.session.commit()
         print("Success", file=sys.stdout)
 
+
+# main 
 if __name__ == "__main__":
     main()
     # Allows for command line interaction with Flask application
