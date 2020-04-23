@@ -15,9 +15,12 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # Link the Flask app with the database (no Flask app is actually being run yet).
 db.init_app(app)
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
+@app.route("/", methods=["GET"])
+def initial():
+    return redirect(url_for('index'))
 
 @app.route("/register", methods=["GET", "POST"])
 @app.route("/register/<int:parameter>", methods=["GET", "POST"])
@@ -77,9 +80,33 @@ def authentication():
 def func(param):
     if request.method == "GET":
         if session.get(param) is not None:
-            return render_template("homepage.html", headline=param)
+            return render_template("search.html", headline=param)
         else:
             return "<h1>Please Login to Access</h1>"
+    else:
+        value = request.form.get('dropdown')
+        # print(value, file=sys.stdout) 
+        search = request.form.get('box')
+        # print(search, file=sys.stdout)
+        list = []
+        if value == "ISBN":
+            list = Book.query.filter(Book.isbn.ilike("%"+search+"%")).all()
+        elif value == "Title":
+            list = Book.query.filter(Book.title.ilike("%"+search+"%")).all()
+        else:
+            list = Book.query.filter(Book.author.ilike("%"+search+"%")).all()
+        isbns = []
+        titles = []
+        authors = []
+        for i in list:
+            isbns.append(i.isbn)
+            titles.append(i.title)
+            authors.append(i.author)
+        return render_template("homepage.html", length=len(list), isbns=isbns, titles=titles, authors=authors, headline=param, search=search)
+
+@app.route("/home/<param>/<arg>", methods=["GET, POST"])
+def page(param, arg):
+    return "cool"
 
 @app.route("/logout/<param>", methods=["POST"])
 def logout(param):
