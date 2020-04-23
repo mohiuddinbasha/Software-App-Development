@@ -9,7 +9,7 @@
     </head>
     <body>
         <img src="{{ url_for('static', filename='favicon.png')}}" alt="Search" class="image">
-        <h2>Book Search</h2>
+        <a href="{{ url_for('func', param=headline) }}" style="text-decoration: none;"><h2 style="color: black;">Book Search</h2></a>
         <hr class="line">
         <h6 style="background-color: white; position: relative; top: 95px; left: 465px;">Find a book:</h6>
         <h5 style="position: relative; left: 20px;">User: {{ headline }}</h5>

@@ -16,8 +16,8 @@ class Book(db.Model):
     year = db.Column(db.Integer, nullable=False)
 
 class Review(db.Model):
-    _tablename_ = "reviews"
+    __tablename__ = "reviews"
     isbn = db.Column(db.String, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
     review = db.Column(db.String, nullable=False)

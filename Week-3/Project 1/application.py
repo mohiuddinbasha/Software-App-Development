@@ -1,6 +1,7 @@
 import sys, os, time, calendar;
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_session import Session
+from sqlalchemy import and_
 from models import *
 
 app = Flask(__name__)
@@ -15,8 +16,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # Link the Flask app with the database (no Flask app is actually being run yet).
 db.init_app(app)
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 @app.route("/", methods=["GET"])
 def initial():
@@ -104,11 +105,84 @@ def func(param):
             authors.append(i.author)
         return render_template("homepage.html", length=len(list), isbns=isbns, titles=titles, authors=authors, headline=param, search=search)
 
-@app.route("/book/<param>/<arg>", methods=["GET"])
+@app.route("/book/<param>/<arg>", methods=["GET", "POST"])
 def page(param, arg):
-    print(param)
-    print(arg)
-    return "cool"
+    if request.method == "GET":
+        if session.get(param) is not None:
+            bookObj = Book.query.filter_by(isbn=arg).first()
+            list = Review.query.filter_by(isbn=arg).all()
+            if len(list) == 0:
+                users = ["-"]
+                ratings = [0]
+                reviews = ["-"]
+                return render_template("review.html", headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=1,boolean=True)    
+            obj = Review.query.filter(and_(Review.isbn == arg, Review.name == param)).first()
+            users = []
+            ratings = []
+            reviews = []
+            for i in list:
+                users.append(i.name)
+                ratings.append(i.rating)
+                reviews.append(i.review)
+            if obj is None:
+                return render_template("review.html",headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=len(list),boolean=True)
+            else:
+                return render_template("review.html",headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=len(list),boolean=False)
+        else:
+            return "<h1>Please Login to Access</h1>"
+    else:
+        # # print("Rey Hajam", file=sys.stdout)
+        # obj = Review.query.filter(and_(Review.isbn == arg, Review.name == param)).first()
+        # # print(obj, file=sys.stdout)
+        # if len(obj) == 0:
+        #     # print("Vammo", file=sys.stdout)
+        #     rating = request.form.get('rate')
+        #     review = request.form.get('textarea')
+        #     reviewObj = Review(isbn=arg,name=param,rating=rating,review=review)
+        #     db.session.add(reviewObj)
+        #     db.session.commit()
+        #     bookObj = Book.query.filter_by(isbn=arg).first()
+        #     list = Review.query.filter_by(isbn=arg).all()
+        #     users = []
+        #     ratings = []
+        #     reviews = []
+        #     for i in list:
+        #         users.append(i.name)
+        #         ratings.append(i.rating)
+        #         reviews.append(i.review)
+        #     return render_template("review.html",headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=len(list))
+        # else:
+        #     flag = 1
+        #     list=Review.query.filter_by(isbn=arg).all()
+        #     bookObj = Book.query.filter_by(isbn=arg).first()
+        #     if len(list) == 0:
+        #         users = ["-"]
+        #         ratings = [0]
+        #         reviews = ["-"]
+        #         return render_template("review.html", headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=1)    
+        #     users = []
+        #     ratings = []
+        #     reviews = []
+        #     for i in list:
+        #         users.append(i.name)
+        #         ratings.append(i.rating)
+        #         reviews.append(i.review)
+        #     return render_template("review.html",headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=len(list))
+        rating = request.form.get('rate')
+        review = request.form.get('textarea')
+        reviewObj = Review(isbn=arg,name=param,rating=rating,review=review)
+        db.session.add(reviewObj)
+        db.session.commit()
+        bookObj = Book.query.filter_by(isbn=arg).first()
+        list = Review.query.filter_by(isbn=arg).all()
+        users = []
+        ratings = []
+        reviews = []
+        for i in list:
+            users.append(i.name)
+            ratings.append(i.rating)
+            reviews.append(i.review)
+        return render_template("review.html",headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=len(list),boolean=False)   
 
 @app.route("/logout/<param>", methods=["POST"])
 def logout(param):
