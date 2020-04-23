@@ -47,7 +47,7 @@
                       {% for num in range(0, length) %}
                         <tr>
                           <th scope="row">{{ num+1 }}</th>
-                          <td>{{ isbns[num] }}</td>
+                          <td><a href="{{ url_for('page', param=headline, arg=isbns[num]) }}">{{ isbns[num] }}</a></td>
                           <td>{{ titles[num] }}</td>
                           <td>{{ authors[num] }}</td>
                         </tr>

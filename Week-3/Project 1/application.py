@@ -104,8 +104,10 @@ def func(param):
             authors.append(i.author)
         return render_template("homepage.html", length=len(list), isbns=isbns, titles=titles, authors=authors, headline=param, search=search)
 
-@app.route("/home/<param>/<arg>", methods=["GET, POST"])
+@app.route("/book/<param>/<arg>", methods=["GET"])
 def page(param, arg):
+    print(param)
+    print(arg)
     return "cool"
 
 @app.route("/logout/<param>", methods=["POST"])
