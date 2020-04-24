@@ -92,7 +92,7 @@ h6 {
     border-radius: 8px;
     width: 100px;
     position: relative;
-    top: -110px;
+    top: -115px;
     left: 1400px;
 }
 .logoutBook {
@@ -109,9 +109,25 @@ h6 {
     border-radius: 8px;
     width: 100px;
     position: relative;
-    /* top: -80px; */
-    top: -660px;
+    top: -640px;
     left: 1380px;
+}
+.logoutReviewed {
+  background-color: #81d4fa; /* Green */
+  border: 2px solid rgb(5, 5, 5);
+  color: rgb(5, 5, 5);
+  padding: 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100px;
+  position: relative;
+  top: -1060px;
+  left: 980px;
 }
 .button:hover {
     background-color: #555555;
@@ -158,7 +174,7 @@ h2 {
   height: 46px;
   padding: 0 10px;
   position: relative;
-  top: -190px;
+  top: -170px;
   left: 900px;
 }
 .rate:not(:checked) > input {
@@ -206,7 +222,7 @@ h2 {
   border-radius: 8px;
   width: 95px;
   position: relative;
-  top: -230px;
+  top: -210px;
   left: 925px;
 }
 .reviewSubmit:hover {
@@ -222,6 +238,6 @@ h2 {
 #reviewfield {
   position: relative;
   left: 900px;
-  top: -250px;
+  top: -230px;
   resize: none;
 }
