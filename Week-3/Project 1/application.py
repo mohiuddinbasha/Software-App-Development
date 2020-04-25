@@ -1,6 +1,7 @@
 import sys, os, time, calendar;
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_session import Session
+from sqlalchemy import and_
 from models import *
 
 app = Flask(__name__)
@@ -18,6 +19,9 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+@app.route("/", methods=["GET"])
+def initial():
+    return redirect(url_for('index'))
 
 @app.route("/register", methods=["GET", "POST"])
 @app.route("/register/<int:parameter>", methods=["GET", "POST"])
@@ -77,9 +81,73 @@ def authentication():
 def func(param):
     if request.method == "GET":
         if session.get(param) is not None:
-            return render_template("homepage.html", headline=param)
+            return render_template("search.html", headline=param)
         else:
             return "<h1>Please Login to Access</h1>"
+    else:
+        value = request.form.get('dropdown')
+        search = request.form.get('box')
+        if len(search) == 0:
+            return redirect(url_for('func', param=param))
+        list = []
+        if value == "ISBN":
+            list = Book.query.filter(Book.isbn.ilike("%"+search+"%")).all()
+        elif value == "Title":
+            list = Book.query.filter(Book.title.ilike("%"+search+"%")).all()
+        else:
+            list = Book.query.filter(Book.author.ilike("%"+search+"%")).all()
+        isbns = []
+        titles = []
+        authors = []
+        for i in list:
+            isbns.append(i.isbn)
+            titles.append(i.title)
+            authors.append(i.author)
+        return render_template("homepage.html", length=len(list), isbns=isbns, titles=titles, authors=authors, headline=param, search=search)
+
+@app.route("/book/<param>/<arg>", methods=["GET", "POST"])
+def page(param, arg):
+    if request.method == "GET":
+        if session.get(param) is not None:
+            bookObj = Book.query.filter_by(isbn=arg).first()
+            list = Review.query.filter_by(isbn=arg).all()
+            if len(list) == 0:
+                users = ["-"]
+                ratings = [0]
+                reviews = ["-"]
+                return render_template("review.html", headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=1)    
+            obj = Review.query.filter(and_(Review.isbn == arg, Review.name == param)).first()
+            users = []
+            ratings = []
+            reviews = []
+            for i in list:
+                users.append(i.name)
+                ratings.append(i.rating)
+                reviews.append(i.review)
+            if obj is None:
+                return render_template("review.html",headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=len(list))
+            else:
+                return render_template("reviewed.html",headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=len(list))
+        else:
+            return "<h1>Please Login to Access</h1>"
+    else:
+        rating = request.form.get('rate')
+        review = request.form.get('textarea')
+        if rating is None or len(review) == 0:
+            return redirect(url_for('page', param=param, arg=arg))
+        reviewObj = Review(isbn=arg,name=param,rating=rating,review=review)
+        db.session.add(reviewObj)
+        db.session.commit()
+        bookObj = Book.query.filter_by(isbn=arg).first()
+        list = Review.query.filter_by(isbn=arg).all()
+        users = []
+        ratings = []
+        reviews = []
+        for i in list:
+            users.append(i.name)
+            ratings.append(i.rating)
+            reviews.append(i.review)
+        return render_template("reviewed.html",headline=param,isbnObj=bookObj,users=users,ratings=ratings,reviews=reviews,length=len(list))   
 
 @app.route("/logout/<param>", methods=["POST"])
 def logout(param):

@@ -1,6 +1,6 @@
 import os, csv, sys;
 from flask import Flask
-from sample import *
+from models import *
 
 app = Flask(__name__)
 
