@@ -109,11 +109,10 @@ h6 {
     border-radius: 8px;
     width: 100px;
     position: relative;
-    /* top: -80px; */
     top: -640px;
     left: 1380px;
 }
-.reviewed {
+.logoutReviewed {
   background-color: #81d4fa; /* Green */
   border: 2px solid rgb(5, 5, 5);
   color: rgb(5, 5, 5);

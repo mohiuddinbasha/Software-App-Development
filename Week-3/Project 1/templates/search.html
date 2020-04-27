@@ -9,6 +9,7 @@
     </head>
     <body>
         <img src="{{ url_for('static', filename='favicon.png')}}" alt="Search" class="image">
+        <!-- <img src="favicon.png" alt="Search" class="image"> -->
         <a href="{{ url_for('func', param=headline) }}" style="text-decoration: none;"><h2 style="color: black;">Book Search</h2></a>
         <hr class="line">
         <h6 style="background-color: white; position: relative; top: 95px; left: 465px;">Find a book:</h6>
@@ -25,39 +26,8 @@
           </div>
         </form>
         <form method="post">
-          <button class="logout" style="font-weight: bold;" formaction="{{ url_for('logout', param=headline) }}">Logout</button>
+          <button class="logout" formaction="{{ url_for('logout', param=headline) }}">Logout</button>
         </form>
-        <div class="panel panel-default">
-            <div class="panel-heading text-center">
-                Showing {{ length }} results for "{{ search }}"
-            </div>
-            <div class="panel-body">
-                <div class="my-custom-scrollbar" style="position: relative; height: 540px; overflow: auto;">
-                  <table class="table table-hover table-bordered text-center mb-0">
-                    <thead style="background-color: 616161; color: white;">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">S.No</th>
-                        <th scope="col">ISBN</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Author</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for num in range(0, length) %}
-                        <tr>
-                          <th scope="row">{{ num+1 }}</th>
-                          <td><a href="{{ url_for('page', param=headline, arg=isbns[num]) }}">{{ isbns[num] }}</a></td>
-                          <td>{{ titles[num] }}</td>
-                          <td>{{ authors[num] }}</td>
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-            </div>
-            <div class="panel-footer text-center">
-            </div>
         </div>
     </body>
 </html>
