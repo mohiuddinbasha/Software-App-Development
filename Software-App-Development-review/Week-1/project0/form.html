@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <link rel="stylesheet" href="reference.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <h1 class = "h1Class">Software App Development Project 0</h1>
+        <div class = "text-right">
+            <a href="index.html" class="btn btn-link btn-lg" type="button">Home</a>
+            <a href="table.html" class="btn btn-link btn-lg" type="button">Table</a>
+            <a href="form.html" class="btn btn-link btn-lg" type="button">Form</a>
+            <a href="list.html" class="btn btn-link btn-lg" type="button">List</a>
+        </div>
+        <hr class="style">
+        <h2 class = "h2Class">Login Details</h2>
+        <div class="container">
+            <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            </div>
+            <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+            </div>
+            <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+            </div>
+            <button id="buttonH" type="submit" class="btn btn-default">Submit</button>
+        </div>
+        <div class="errors">
+            <div class="alert alert-primary" role="alert">
+                Empty Fields
+            </div>
+            <div class="alert alert-danger" role="alert">
+                Oops! Entered wrong credentials
+            </div>
+            <div class="alert alert-success" role="alert">
+                Hurray! Login Successfully
+            </div>
+        </div>
+    </body>
+</html>

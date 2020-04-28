@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <link rel="stylesheet" href="reference.css">
+        <link rel="stylesheet" href="variables.css">
+        <link rel="stylesheet" href="nesting.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1 class = "h1Class">Software App Development Project 0</h1>
+        <div class = "text-right">
+            <a href="index.html" class="btn btn-link btn-lg" type="button">Home</a>
+            <a href="table.html" class="btn btn-link btn-lg" type="button">Table</a>
+            <a href="form.html" class="btn btn-link btn-lg" type="button">Form</a>
+            <a href="list.html" class="btn btn-link btn-lg" type="button">List</a>
+        </div>
+        <hr class="style">
+        <h2 id="number">Number Grid</h2>
+        <div class="wrapper">
+            <div class="box a">1</div>
+            <div class="box b">2</div>
+            <div class="box c">3</div>
+            <div class="box d">4</div>
+            <div class="box e">5</div>
+            <div class="box f">6</div>
+            <div class="box g">7</div>
+            <div class="box h">8</div>
+            <div class="box i">9</div>
+            <div class="special">0</div>
+        </div>
+        <h2 id="number" style="position: relative; top: -310px; left: 600px;">Nesting</h2>
+        <div style="position: relative; top: -290px; left: 600px; font-size: 20px;">
+            <div id = "nesting">
+                <p>This is a paragraph inside the div.</p>
+    
+                List inside the div:
+                <ul>
+                    <li>item one</li>
+                    <li>item two</li>
+                    <li>item three</li>
+                </ul>
+            </div>
+    
+            <p>This is a paragraph outside the div.</p>
+    
+            List outside the div:
+            <ul>
+                <li>item one</li>
+                <li>item two</li>
+                <li>item three</li>
+            </ul>
+        </div>
+        <h2 id="number" style="position: relative; top: -710px; left: 1150px;">Variables</h2>
+        <div style="position: relative; top: -690px; left: 1150px; font-size: 20px;">
+            Unordered List
+            <ul>
+                <li>item one</li>
+                <li>item two</li>
+                <li>item three</li>
+            </ul>
+
+            Ordered List
+            <ol>
+                <li>item one</li>
+                <li>item two</li>
+                <li>item three</li>
+            </ol>
+        </div>
+    </body>
+</html>
