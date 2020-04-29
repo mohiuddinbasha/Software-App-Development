@@ -1,0 +1,244 @@
+h1, h6 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    position: absolute;
+    top: 50px;
+    left: 150px;
+}
+
+#register {
+    text-align: center;
+}
+
+h6 {
+    position: absolute;
+    top: 120px;
+    left: 160px;
+    background-color: rgb(142, 235, 204);
+}
+
+.container {
+    width: auto;
+    position: absolute;
+    top: 150px;
+    left: 150px;
+}
+
+#centertable {
+    border-radius: 2px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+    position: relative;
+    top: 150px;
+}
+
+.panel {
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+    position: relative;
+    top: 150px;
+}
+.panel-heading {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding-top: 7px;
+    height: 40px;
+}
+.panel-footer {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding-top: 7px;
+    height: 40px;
+}
+#drop {
+  width: 10%;
+  position: relative;
+  top: 100px;
+  left: 460px;
+  background-color: #c5e1a5;
+}
+.button {
+    background-color: rgb(252, 253, 252);
+    border: 2px solid rgb(5, 5, 5);
+    color: rgb(5, 5, 5);
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 95px;
+    position: relative;
+    top: 103px;
+    left: 785px;
+}
+.logout {
+  background-color: #81d4fa; /* Green */
+    border: 2px solid rgb(5, 5, 5);
+    color: rgb(5, 5, 5);
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100px;
+    position: relative;
+    top: -115px;
+    left: 1400px;
+}
+.logoutBook {
+    background-color: #81d4fa; /* Green */
+    border: 2px solid rgb(5, 5, 5);
+    color: rgb(5, 5, 5);
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100px;
+    position: relative;
+    /* top: -80px; */
+    top: -640px;
+    left: 1380px;
+}
+.reviewed {
+  background-color: #81d4fa; /* Green */
+  border: 2px solid rgb(5, 5, 5);
+  color: rgb(5, 5, 5);
+  padding: 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100px;
+  position: relative;
+  top: -1060px;
+  left: 980px;
+}
+.button:hover {
+    background-color: #555555;
+    color: white;
+}
+.box {
+  border-radius: 8px;
+  width: 20%;
+  position: relative;
+  top: 58px;
+  left: 625px;
+}
+/* #h6String {
+  position: relative;
+  top: 95px;
+  left: 465px;
+} */
+hr.line {
+  border: 2px solid black;
+  border-radius: 2px;
+  width: 60%;
+}
+.image {
+  width: 4%;
+  position: relative;
+  top: 50px;
+  left: 600px;
+}
+h2 {
+  text-align: center;
+}
+.pull-left {
+  float: left;
+  color: white;
+  padding-left: 15px;
+}
+.pull-right {
+  float: right;
+  color: white;
+  padding-right: 15px;
+}
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+  position: relative;
+  top: -170px;
+  left: 900px;
+}
+.rate:not(:checked) > input {
+  position: absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color:#fff176;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #fff176;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #fff176;
+}
+.reviewSubmit {
+  background-color: rgb(252, 253, 252);
+  border: 2px solid rgb(5, 5, 5);
+  color: rgb(5, 5, 5);
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 95px;
+  position: relative;
+  top: -210px;
+  left: 925px;
+}
+.reviewSubmit:hover {
+  background-color: #555555;
+  color: white;
+}
+#block {
+  width: 30%;
+  position: relative;
+  left: 80px;
+  top: 120px;
+}
+#reviewfield {
+  position: relative;
+  left: 900px;
+  top: -230px;
+  resize: none;
+}

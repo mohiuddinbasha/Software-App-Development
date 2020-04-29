@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <link rel = "stylesheet" href="{{ url_for('static', filename='reference.css')}}">
+        <!-- <link rel = "stylesheet" href="reference.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <img src="{{ url_for('static', filename='favicon.png')}}" alt="Search" class="image">
+        <!-- <img src="favicon.png" alt="Search" class="image"> -->
+        <a href="{{ url_for('func', param=headline) }}" style="text-decoration: none;"><h2 style="color: black;">Book Search</h2></a>
+        <hr class="line">
+        <h6 style="background-color: white; position: relative; top: 95px; left: 465px;">Find a book:</h6>
+        <h5 style="position: relative; left: 20px;">User: {{ headline }}</h5>
+        <form method="post">
+          <select class="custom-select" id="drop" name="dropdown">
+            <option value="ISBN">ISBN</option>
+            <option value="Title">Title</option>
+            <option value="Author">Author</option>
+          </select>
+          <button class="button" formaction="{{ url_for('func', param=headline) }}">Submit</button>
+          <div class="box">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="box">
+          </div>
+        </form>
+        <form method="post">
+          <button class="logout" formaction="{{ url_for('logout', param=headline) }}">Logout</button>
+        </form>
+        </div>
+    </body>
+</html>
