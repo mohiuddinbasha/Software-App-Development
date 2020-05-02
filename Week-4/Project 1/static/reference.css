@@ -40,7 +40,7 @@ h6 {
     margin: 0px auto;
     float: none;
     position: relative;
-    top: 150px;
+    top: 200px;
 }
 .panel-heading {
     background-color: rgb(0, 0, 0);
@@ -175,12 +175,12 @@ h2 {
   height: 46px;
   padding: 0 10px;
   position: relative;
-  top: -170px;
+  top: 140px;
   left: 900px;
 }
 .rate:not(:checked) > input {
   position: absolute;
-  top:-9999px;
+  left:-9999px;
 }
 .rate:not(:checked) > label {
   float:right;
@@ -223,8 +223,8 @@ h2 {
   border-radius: 8px;
   width: 95px;
   position: relative;
-  top: -210px;
-  left: 925px;
+  top: 70px;
+  left: 935px;
 }
 .reviewSubmit:hover {
   background-color: #555555;
@@ -234,11 +234,15 @@ h2 {
   width: 30%;
   position: relative;
   left: 80px;
-  top: 120px;
+  top: 420px;
 }
 #reviewfield {
   position: relative;
   left: 900px;
-  top: -230px;
+  top: 60px;
   resize: none;
+}
+.button:focus, .logout:focus, .reviewSubmit:focus {
+  outline: 0 !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
 }

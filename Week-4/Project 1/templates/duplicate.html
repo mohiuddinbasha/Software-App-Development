@@ -37,3 +37,24 @@
         </form>
     </body>
 </html>
+{% for num in range(0, length) %}
+<tr>
+    <th scope="row">{{ num+1 }}</th>
+    <td>{{ users[num] }}</td>
+    <td>{% for i in range(0, ratings[num]) %}
+        <span class="fa fa-star checked" style="color: #fff176;"></span>
+        {% endfor %}
+        {% for i in range(0, 5-ratings[num]) %}
+        <span class="fa fa-star"></span>
+        {% endfor %}
+    </td>
+    <td>{{ reviews[num] }}</td>
+</tr>
+{% endfor %}
+
+
+
+<!-- <h3 class="form-control">ISBN &ensp;&emsp;&emsp;- &emsp;hero</h3>
+<h3 class="form-control">Title &ensp;&emsp;&emsp;&nbsp;- &emsp;hero</h3>
+<h3 class="form-control">Author &ensp;&emsp;- &emsp;hero</h3>
+<h3 class="form-control">Year &ensp;&emsp;&emsp;&nbsp;- &emsp;hero</h3> -->

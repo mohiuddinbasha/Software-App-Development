@@ -1,5 +1,5 @@
 import sys, os, time, calendar;
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from flask_session import Session
 from sqlalchemy import and_
 from models import *
@@ -81,7 +81,7 @@ def authentication():
 def func(param):
     if request.method == "GET":
         if session.get(param) is not None:
-            return render_template("search.html", headline=param)
+            return render_template("homepage.html", headline=param)
         else:
             return "<h1>Please Login to Access</h1>"
     else:
@@ -153,3 +153,83 @@ def page(param, arg):
 def logout(param):
     session[param] = None
     return redirect(url_for('index'))
+
+@app.route("/api/search", methods=["POST"])
+def apiSearch():
+    data = request.json
+    # print(data, file=sys.stdout)
+    searchby = (data["searchby"]).lower()
+
+    # print(searchby, file=sys.stdout)
+    search = data["search"]
+    list = []
+    if searchby == "isbn":
+        list = Book.query.filter(Book.isbn.ilike("%"+search+"%")).all()
+    elif searchby == "title":
+        list = Book.query.filter(Book.title.ilike("%"+search+"%")).all()
+    else:
+        list = Book.query.filter(Book.author.ilike("%"+search+"%")).all()
+    if len(list) == 0:
+        return jsonify({"Message" : "No results"}), 400 
+    isbns = []
+    titles = []
+    authors = []
+    years = []
+    for i in list:
+        isbns.append(i.isbn)
+        titles.append(i.title)
+        authors.append(i.author)
+        years.append(i.year)
+    dict = {
+        "isbns" : isbns,
+        "titles" : titles,
+        "authors" : authors,
+        "years" : years
+    }
+    # print(dict)
+    # print(jsonify(dict))
+    return jsonify(dict), 200
+
+@app.route("/api/book", methods=["POST"])
+def apiBook():
+    data = request.json
+    isbn = data["isbn"]
+    bookObj = Book.query.filter_by(isbn=isbn).first()
+    list = Review.query.filter_by(isbn=isbn).all()
+    dict = {}
+    if len(list) == 0:
+        dict["users"] = ["-"]
+        dict["ratings"] = [0]
+        dict["reviews"] = ["-"]
+        return jsonify(dict), 200
+    users = []
+    ratings = []
+    reviews = []
+    for i in list:
+        users.append(i.name)
+        ratings.append(i.rating)
+        reviews.append(i.review)
+    dict = {
+        "users" : users,
+        "ratings" : ratings,
+        "reviews" : reviews
+    }
+    # print(dict)
+    return jsonify(dict), 200
+
+@app.route("/api/submit_review", methods=["POST"])
+def apiSubmitReview():
+    data = request.json
+    user = data["user"]
+    isbn = data["isbn"]
+    rating = data["rating"]
+    review = data["review"]
+    obj = Review.query.filter(and_(Review.isbn == isbn, Review.name == user)).first()
+    if obj is not None:
+        return jsonify({"Message" : "Already reviewed for this book"})
+    else:
+        reviewObj = Review(isbn=isbn,name=user,rating=rating,review=review)
+        db.session.add(reviewObj)
+        db.session.flush()
+        db.session.commit()
+        return jsonify({"Message" : "Successfully Reviewed"})
