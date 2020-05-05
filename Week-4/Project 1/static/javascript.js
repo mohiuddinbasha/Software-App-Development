@@ -4,6 +4,10 @@ function check() {
     request.open('POST', '/api/search')
     request.setRequestHeader("Content-Type", "application/json");
     let search = document.querySelector('#Search').value;
+    if (search === "") {
+        event.preventDefault();
+        return false;
+    }
     if (document.querySelector('#drop').value == "ISBN") {
         request.send(JSON.stringify({"searchby" : "ISBN", "search" : search}));
     } else if (document.querySelector('#drop').value == "Title") {
@@ -13,23 +17,27 @@ function check() {
     }
     request.onload = () => {
         const data = JSON.parse(request.responseText);
-        let isbns = data.isbns;
-        let titles = data.titles;
-        let authors = data.authors;
-        let string = "";
-        value = [];
-        for (let i = 0; i < isbns.length; i++) {
-            // console.log(typeof isbns[i]);
-            value.push(isbns[i]);
-            string += "<tr>";
-            string += "<th scope=\"row\">"+(i+1)+"</th>";
-            string += "<td><a href=\"javascript:method("+i+")\">"+isbns[i]+"</a></td>";
-            string += "<td>"+titles[i]+"</td>";
-            string += "<td>"+authors[i]+"</td>";
-            string += "</tr>";
+        if (request.status === 400) {
+            document.getElementById("panel-heading").innerHTML = "Showing "+0+" results for \""+search+"\"";
+        } else {
+            let isbns = data.isbns;
+            let titles = data.titles;
+            let authors = data.authors;
+            let string = "";
+            value = [];
+            for (let i = 0; i < isbns.length; i++) {
+                // console.log(typeof isbns[i]);
+                value.push(isbns[i]);
+                string += "<tr>";
+                string += "<th scope=\"row\">"+(i+1)+"</th>";
+                string += "<td><a href=\"javascript:method("+i+")\">"+isbns[i]+"</a></td>";
+                string += "<td>"+titles[i]+"</td>";
+                string += "<td>"+authors[i]+"</td>";
+                string += "</tr>";
+            }
+            document.getElementById("panel-heading").innerHTML = "Showing "+isbns.length+" results for \""+search+"\"";
+            document.querySelector('#tbody').innerHTML = string;
         }
-        document.getElementById("panel-heading").innerHTML = "Showing "+isbns.length+" results for \""+search+"\"";
-        document.querySelector('#tbody').innerHTML = string;
     }
     document.getElementById("tableSection").style.display = "block";
     document.getElementById("secondpart").style.display = "none";
@@ -113,7 +121,8 @@ function method(index) {
             document.getElementById("reviewedText").style.display = "block";
         }
         document.getElementById("secondpart").style.display = "block";
-        event.preventDefault();
+        location.href = "#secondpart";
+        // event.preventDefault();
         return true;
     }
 }
@@ -124,14 +133,22 @@ function func() {
     user = user.substring(6);
     let isbn = document.querySelector('#form-isbn').innerText;
     isbn = isbn.substring(11);
-    let rating = 1;
+    let rating = 0;
     let rates = document.getElementsByName('rate');
     rates.forEach((rate) => {
         if(rate.checked){
             rating = rate.value;
         }
     })
+    if (rating === 0) {
+        event.preventDefault();
+        return false;
+    }
     let review = document.getElementById('reviewfield').value;
+    if (review === "") {
+        event.preventDefault();
+        return false;
+    }
     // console.log(user);
     // console.log(rating);
     // console.log(review); 
