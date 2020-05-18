@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <style>
+            .button {
+                background-color: rgb(252, 253, 252); /* Green */
+                border: 2px solid rgb(5, 5, 5);
+                color: rgb(5, 5, 5);
+                padding: 18px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 8px;
+                width: 100px;
+                position: relative;
+                top: 60px;
+                left: 1250px;
+            }
+            .button:hover {
+                background-color: #555555;
+                color: white;
+            }
+        </style>
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='reference.css')}}"> -->
+        <!-- <link rel = "stylesheet" href="reference.css"> -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <h1 style="text-align: center; position: relative; top: 50px;">Welcome {{ headline }}</h1>
+        <form method="post">
+            <button class="button" formaction="{{ url_for('logout', param=headline) }}">Logout</button>
+        </form>
+    </body>
+</html>
+{% for num in range(0, length) %}
+<tr>
+    <th scope="row">{{ num+1 }}</th>
+    <td>{{ users[num] }}</td>
+    <td>{% for i in range(0, ratings[num]) %}
+        <span class="fa fa-star checked" style="color: #fff176;"></span>
+        {% endfor %}
+        {% for i in range(0, 5-ratings[num]) %}
+        <span class="fa fa-star"></span>
+        {% endfor %}
+    </td>
+    <td>{{ reviews[num] }}</td>
+</tr>
+{% endfor %}
+
+
+
+<!-- <h3 class="form-control">ISBN &ensp;&emsp;&emsp;- &emsp;hero</h3>
+<h3 class="form-control">Title &ensp;&emsp;&emsp;&nbsp;- &emsp;hero</h3>
+<h3 class="form-control">Author &ensp;&emsp;- &emsp;hero</h3>
+<h3 class="form-control">Year &ensp;&emsp;&emsp;&nbsp;- &emsp;hero</h3> -->

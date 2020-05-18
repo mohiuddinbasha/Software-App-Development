@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <script src="{{ url_for('static', filename='javascript.js')}}"></script>
+        <link rel = "stylesheet" href="{{ url_for('static', filename='reference.css')}}">
+        <!-- <link rel = "stylesheet" href="reference.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <img src="{{ url_for('static', filename='favicon.png')}}" alt="Search" class="image">
+        <a href="{{ url_for('func', param=headline) }}" style="text-decoration: none;"><h2 style="color: black;">Book Search</h2></a>
+        <hr class="line">
+        <h6 style="background-color: white; position: relative; top: 95px; left: 465px;">Find a book:</h6>
+        <h5 style="position: relative; left: 20px;">User: {{ headline }}</h5>
+        <form>
+          <select class="custom-select" id="drop" name="dropdown">
+            <option value="ISBN">ISBN</option>
+            <option value="Title">Title</option>
+            <option value="Author">Author</option>
+          </select>
+          <button class="button" onclick="check()">Submit</button>
+          <div class="box">
+            <input class="form-control" type="text" id='Search' placeholder="Search" aria-label="Search" name="box">
+          </div>
+        </form>
+        <form method="post">
+          <button class="logout" style="font-weight: bold;" formaction="{{ url_for('logout', param=headline) }}">Logout</button>
+        </form>
+        <div class="panel panel-default" id="tableSection" style="display: none;">
+          <div id="panel-heading" class="panel-heading text-center">
+              Showing {{ length }} results for "{{ search }}"
+          </div>
+          <div class="panel-body">
+            <div class="my-custom-scrollbar" style="position: relative; height: 540px; overflow: auto;">
+              <table class="table table-hover table-bordered text-center mb-0">
+                <thead style="background-color: 616161; color: white;">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel-footer text-center">
+          </div>
+        </div>
+        <div id="secondpart" style="display: none;">
+          <h4 style="position: relative; left: 60px; top: 400px;">Details of the book:</h4>
+          <div class="form-group" id="block">
+          </div>
+          <div id="hide">
+            <form>
+              <h4 style="position: relative; top: 185px; left: 700px;">Rate the book</h4> 
+              <div id="ratingValue" class="rate">       
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="5 stars">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="4 stars">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="3 stars">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="2 stars">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="1 star">1 star</label>  
+              </div> 
+              <br>
+              <br>
+              <br>
+              <br>
+              <div class="col-lg-4 col-lg-offset-4">
+                <label for="example2"><h4 style="position: relative; top: 110px; left: 685px;">Review the book</h4></label>
+                <textarea type="text" rows="5" cols="50" class="form-control" id="reviewfield" name="textarea" placeholder="Please write you review"></textarea>
+              </div>
+              <button class="reviewSubmit" onclick="func()">Submit</button>
+              <br>
+            </form>
+          </div>
+          <div id="reviewedText">
+            <h4 style="position: relative; top: 280px; left: 685px;">Review the book: You have already reviewed the book</h4>
+          </div>
+          <br>
+          <div id="secondtable" class="panel panel-default" style="position: relative; top: 280px;">
+            <div class="panel-heading text-center">
+                Book Reviews
+            </div>
+            <div class="panel-body">
+              <div class="my-custom-scrollbar" style="position: relative; height: 540px; overflow: auto;">
+                <table class="table table-hover table-bordered text-center mb-0">
+                  <thead style="background-color: 616161; color: white;">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">S.No</th>
+                      <th scope="col">User</th>
+                      <th scope="col">Rating</th>
+                      <th scope="col">Review</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reviewtbody">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="panel-footer text-center">
+            </div>
+          </div>
+        </div>
+    </body>
+</html>
