@@ -1,0 +1,82 @@
+.button {
+    background-color: rgb(252, 253, 252);
+    border: 2px solid rgb(5, 5, 5);
+    color: rgb(5, 5, 5);
+    padding: 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 60px;
+    position: relative;
+    top: 15px;
+    left: 950px;
+}
+.button:hover {
+    background-color: #1e88e5;
+    color: white;
+}
+.button:focus {
+    outline: 0 !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
+#box {
+    border-radius: 8px;
+    width: 30%;
+    position: relative;
+    top: 58px;
+    left: 475px;
+}
+#list {
+    position: relative;
+    top: 80px;
+    left: 425px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    width: 50%;
+    background: #ddd;
+    list-style-type: none;
+    font-size: 18px;
+    transition: 0.2s;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+ul li:hover {
+    background: #eee;
+}
+
+ul li.checked {
+    background: rgb(0, 0, 0);
+    color: #fff;
+    text-decoration: line-through;
+}
+
+ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+
+
+
+
